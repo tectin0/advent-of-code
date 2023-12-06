@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Day 1 (Groovy) Part One",
+      "type": "shell",
+      "command": "cd day1_groovy; groovy part_one.gvy",
+      "problemMatcher": []
+    },
+    {
+      "label": "Day 1 (Groovy) Part Two",
+      "type": "shell",
+      "command": "cd day1_groovy; groovy part_two.gvy",
+      "problemMatcher": []
+    }
+  ]
+}
