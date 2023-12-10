@@ -1,1 +1,9 @@
 target
+*.res
+*.identcache
+*.dproj.local
+*.dproj
+*.delphilsp.json
+Win32
+__history
+__recovery

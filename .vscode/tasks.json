@@ -12,6 +12,11 @@
       "type": "shell",
       "command": "cd day1_groovy; groovy part_two.gvy",
       "problemMatcher": []
+    },
+    {
+      "label": "Day 2 (Delphi)",
+      "type": "shell",
+      "command": "cd day2_delphi; Win32/Debug/part_one_and_two.exe"
     }
   ]
 }
