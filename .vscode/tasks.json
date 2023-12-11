@@ -17,6 +17,16 @@
       "label": "Day 2 (Delphi)",
       "type": "shell",
       "command": "cd day2_delphi; Win32/Debug/part_one_and_two.exe"
+    },
+    {
+      "label": "Day 3 (Lua) Part One",
+      "type": "shell",
+      "command": "cd day3_lua; lua part_one.lua"
+    },
+    {
+      "label": "Day 3 (Lua) Part Two",
+      "type": "shell",
+      "command": "cd day3_lua; lua part_two.lua"
     }
   ]
 }
