@@ -2,6 +2,11 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Generate Random Language",
+      "type": "shell",
+      "command": "cd random-language-generator; cargo run"
+    },
+    {
       "label": "Day 1 (Groovy) Part One",
       "type": "shell",
       "command": "cd day1_groovy; groovy part_one.gvy",
@@ -27,6 +32,16 @@
       "label": "Day 3 (Lua) Part Two",
       "type": "shell",
       "command": "cd day3_lua; lua part_two.lua"
+    },
+    {
+      "label": "Day 4 (GDScript) Part One",
+      "type": "shell",
+      "command": "cd day4_gdscript; godotc -d --script --headless part_one.gd"
+    },
+    {
+      "label": "Day 4 (GDScript) Part Two",
+      "type": "shell",
+      "command": "cd day4_gdscript; godotc --debug --script --headless part_two.gd"
     }
   ]
 }
