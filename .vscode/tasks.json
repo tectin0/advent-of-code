@@ -47,6 +47,16 @@
       "label": "Day 5 (Lisp) Part One",
       "type": "shell",
       "command": "cd day5_lisp; sbcl --script part_one.lisp"
+    },
+    {
+      "label": "Day 5 (Lisp) Part Two",
+      "type": "shell",
+      "command": "cd day5_lisp; sbcl --script part_two.lisp"
+    },
+    {
+      "label": "Dat 5 (Lisp) range transfer testing",
+      "type": "shell",
+      "command": "cd day5_lisp; sbcl --script range_transfer_test.lisp"
     }
   ]
 }

@@ -11,3 +11,4 @@
 - There seems to be a specific "workflow" that is expected when using LISP (using Emacs and Slime) - which I won't follow - so take my thoughts with a grain of salt
 - I've never seen a worse syntax in my life
 - Error messages are a complete joke
+- ((((((((((((((((((((((()))))))))))))))))))))))
