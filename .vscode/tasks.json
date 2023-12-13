@@ -42,6 +42,11 @@
       "label": "Day 4 (GDScript) Part Two",
       "type": "shell",
       "command": "cd day4_gdscript; godotc --debug --script --headless part_two.gd"
+    },
+    {
+      "label": "Day 5 (Lisp) Part One",
+      "type": "shell",
+      "command": "cd day5_lisp; sbcl --script part_one.lisp"
     }
   ]
 }
