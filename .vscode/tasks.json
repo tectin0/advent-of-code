@@ -54,9 +54,19 @@
       "command": "cd day5_lisp; sbcl --script part_two.lisp"
     },
     {
-      "label": "Dat 5 (Lisp) range transfer testing",
+      "label": "Day 5 (Lisp) range transfer testing",
       "type": "shell",
       "command": "cd day5_lisp; sbcl --script range_transfer_test.lisp"
+    },
+    {
+      "label": "Day 6 (Elixir) Part One",
+      "type": "shell",
+      "command": "cd day6_elixir; elixir part_one.exs"
+    },
+    {
+      "label": "Day 6 (Elixir) Part Two",
+      "type": "shell",
+      "command": "cd day6_elixir; elixir part_two.exs"
     }
   ]
 }
