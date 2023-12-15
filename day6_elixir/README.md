@@ -10,3 +10,4 @@
 - VSCode extension is fine
 - No mutability is weird
 - = operator is weird
+- No type system is not good

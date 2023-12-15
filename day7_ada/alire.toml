@@ -1,0 +1,9 @@
+name = "day7_ada"
+description = "Shiny new project"
+version = "0.1.0-dev"
+
+authors = ["Noah Nachtigall"]
+maintainers = ["Noah Nachtigall <noah.nachtigall@gmail.com>"]
+maintainers-logins = ["Tectin"]
+
+executables = ["day7_ada"]

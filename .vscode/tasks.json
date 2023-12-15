@@ -67,6 +67,11 @@
       "label": "Day 6 (Elixir) Part Two",
       "type": "shell",
       "command": "cd day6_elixir; elixir part_two.exs"
+    },
+    {
+      "label": "Day 7 (Ada) Part One and Two",
+      "type": "shell",
+      "command": "cd day7_ada; alr run"
     }
   ]
 }
