@@ -72,6 +72,11 @@
       "label": "Day 7 (Ada) Part One and Two",
       "type": "shell",
       "command": "cd day7_ada; alr run"
+    },
+    {
+      "label": "Day 8 (Zig) Part One and Two",
+      "type": "shell",
+      "command": "cd day8_zig; zig build run"
     }
   ]
 }

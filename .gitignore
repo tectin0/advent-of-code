@@ -7,3 +7,5 @@ target
 Win32
 __history
 __recovery
+zig-cache
+zig-out
