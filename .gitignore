@@ -1,4 +1,6 @@
 target
+
+# Delphi
 *.res
 *.identcache
 *.dproj.local
@@ -7,5 +9,11 @@ target
 Win32
 __history
 __recovery
+
+# Zig
 zig-cache
 zig-out
+
+# Scala
+*.class
+*.tasty

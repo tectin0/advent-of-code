@@ -20,7 +20,7 @@ pub fn run() !void {
     print("Part 2 Answer: {d}\n", .{input_answer});
 }
 
-pub fn calc_steps_to_zzz(filename: str) !u32 {
+pub fn calc_steps_to_zzz(filename: str) !u128 {
     const file = try std.fs.cwd().openFile(filename, .{});
     defer file.close();
 
@@ -97,7 +97,7 @@ pub fn calc_steps_to_zzz(filename: str) !u32 {
     const current_keys: std.ArrayList(str) = keys_that_end_in_a;
 
     var keys_that_end_in_z: u32 = 0;
-    var steps_to___z: u32 = 0;
+    var steps_to___z: u128 = 0;
 
     while (true) {
         for (instructions) |instruction| {

@@ -77,6 +77,32 @@
       "label": "Day 8 (Zig) Part One and Two",
       "type": "shell",
       "command": "cd day8_zig; zig build run"
+    },
+    {
+      "label": "Day 9 (Scala) Part One Build",
+      "type": "shell",
+      "command": "cd day9_scala; scalac part_one.scala"
+    },
+    {
+      "label": "Day 9 (Scala) Part One Run",
+      "type": "shell",
+      "command": "cd day9_scala; scala PartOne",
+      "dependsOn": [
+        "Day 9 (Scala) Part One Build"
+      ]
+    },
+    {
+      "label": "Day 9 (Scala) Part Two Build",
+      "type": "shell",
+      "command": "cd day9_scala; scalac part_two.scala"
+    },
+    {
+      "label": "Day 9 (Scala) Part Two Run",
+      "type": "shell",
+      "command": "cd day9_scala; scala PartTwo",
+      "dependsOn": [
+        "Day 9 (Scala) Part Two Build"
+      ]
     }
   ]
 }
