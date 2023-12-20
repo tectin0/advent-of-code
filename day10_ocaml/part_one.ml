@@ -1,3 +1,4 @@
+(* don't feel like puttings this in 'proper' functions *)
 let file = "input"
 
 let read_lines name : string list = 
@@ -12,14 +13,8 @@ let read_lines name : string list =
 
 let lines = read_lines file
 
-let () = List.iter (fun line -> print_endline line) lines
-
 let line_length = String.length (List.hd lines)
 let number_of_lines = List.length lines
-
-let () = print_endline ("line length: " ^ (string_of_int line_length))
-let () = print_endline ("number of lines: " ^ (string_of_int number_of_lines))
-
 
 let grid = Array.make_matrix number_of_lines line_length '.'
 
@@ -40,8 +35,6 @@ let () =
         start := (j, i)
     done
   done
-
-let () = print_endline ("start: " ^ (string_of_int (fst !start)) ^ ", " ^ (string_of_int (snd !start)))
 
 (* 
   Direction Symbols:
@@ -70,16 +63,6 @@ let south_from_start_valid = List.mem south_from_start_symbol south_valid_symbol
 let east_from_start_valid = List.mem east_from_start_symbol east_valid_symbols
 let west_from_start_valid = List.mem west_from_start_symbol west_valid_symbols
 
-let () = print_endline ("north from start: " ^ (String.make 1 north_from_start_symbol))
-let () = print_endline ("south from start: " ^ (String.make 1 south_from_start_symbol))
-let () = print_endline ("east from start: " ^ (String.make 1 east_from_start_symbol))
-let () = print_endline ("west from start: " ^ (String.make 1 west_from_start_symbol))
-
-let () = print_endline ("north from start valid: " ^ (string_of_bool north_from_start_valid))
-let () = print_endline ("south from start valid: " ^ (string_of_bool south_from_start_valid))
-let () = print_endline ("east from start valid: " ^ (string_of_bool east_from_start_valid))
-let () = print_endline ("west from start valid: " ^ (string_of_bool west_from_start_valid))
-
 let next_position = if north_from_start_valid then (fst !start, (snd !start) - 1)
                     else if south_from_start_valid then (fst !start, (snd !start) + 1)
                     else if east_from_start_valid then ((fst !start) + 1, snd !start)
@@ -92,7 +75,6 @@ let number_of_turns = ref 0
   
 let rec f (x1, y1) (x2, y2) =
   number_of_turns := !number_of_turns + 1;
-  let () = print_endline ("symbol: " ^ (String.make 1 grid.(y2).(x2))) in
 
   let symbol = grid.(y2).(x2) in
   
@@ -109,10 +91,6 @@ let rec f (x1, y1) (x2, y2) =
 
 let end_position = f !start next_position
 
-let () = print_endline ("end position: " ^ (string_of_int (fst end_position)) ^ ", " ^ (string_of_int (snd end_position)))
-
-let () = print_endline ("number of turns: " ^ (string_of_int !number_of_turns))
-
 let furthest_point_from_start = !number_of_turns / 2
 
-let () = print_endline ("furthest point from start: " ^ (string_of_int furthest_point_from_start))
+let () = print_endline ("Part 1 Answer: " ^ (string_of_int furthest_point_from_start))

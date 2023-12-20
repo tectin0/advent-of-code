@@ -116,6 +116,19 @@
       "dependsOn": [
         "Day 10 (OCaml) Part One Build"
       ]
+    },
+    {
+      "label": "Day 10 (OCaml) Part Two Build",
+      "type": "shell",
+      "command": "cd day10_ocaml; wsl -e ocamlopt -o part_two part_two.ml"
+    },
+    {
+      "label": "Day 10 (OCaml) Part Two Run",
+      "type": "shell",
+      "command": "cd day10_ocaml; wsl -e ./part_two",
+      "dependsOn": [
+        "Day 10 (OCaml) Part Two Build"
+      ]
     }
   ]
 }

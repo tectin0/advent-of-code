@@ -20,6 +20,7 @@ zig-out
 
 # OCaml
 day10_ocaml/part_one
+day10_ocaml/part_two
 *.cmi
 *.cmx
 *.o
