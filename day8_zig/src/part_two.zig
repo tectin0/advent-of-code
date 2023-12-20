@@ -9,18 +9,21 @@ const str = []const u8;
 const String = std.ArrayList(u8);
 
 pub fn run() !void {
-    const example_answer = try calc_steps_to_zzz("example3");
+    const example_answer = try calc_steps_to___z("example3");
 
     print("Example 3 Answer: {d}\n", .{example_answer});
     std.debug.assert(example_answer == 6);
 
-    const input_answer = try calc_steps_to_zzz("input");
+    const input_answer = try calc_steps_to___z("input");
 
-    // 10 000 000 000 too low
+    // brute force is not the answer
+    // 3 days only at 280 763 000 000 steps with brute force
+    // 14 265 111 103 729 in 75 ms with 'intelligent' approach
+    // would have taken approx. 15242 days with brute force
     print("Part 2 Answer: {d}\n", .{input_answer});
 }
 
-pub fn calc_steps_to_zzz(filename: str) !u128 {
+pub fn calc_steps_to___z(filename: str) !u128 {
     const file = try std.fs.cwd().openFile(filename, .{});
     defer file.close();
 
@@ -32,10 +35,7 @@ pub fn calc_steps_to_zzz(filename: str) !u128 {
 
     var counter: u32 = 0;
 
-    // first line
     var instructions: str = undefined;
-
-    // rest of lines as hashmap of (key, Tuple(key, key))
 
     const Instruction = struct {
         l: str,
@@ -55,7 +55,7 @@ pub fn calc_steps_to_zzz(filename: str) !u128 {
         if (counter == 0) {
             instructions = try allocator.dupe(u8, line);
         } else {
-            if (line.len < 10) {
+            if (line.len == 1) {
                 continue;
             }
 
@@ -75,11 +75,10 @@ pub fn calc_steps_to_zzz(filename: str) !u128 {
             var value_0: str = value_split.next().?;
             var value_1: str = value_split.next().?;
 
-            // remove ( from value_0
             var value_0_split = std.mem.split(u8, value_0, "(");
             _ = value_0_split.next().?;
             value_0 = value_0_split.next().?;
-            // remove ) from value_1
+
             var value_1_split = std.mem.split(u8, value_1, ")");
             value_1 = value_1_split.next().?;
 
@@ -94,60 +93,109 @@ pub fn calc_steps_to_zzz(filename: str) !u128 {
         counter += 1;
     }
 
-    const current_keys: std.ArrayList(str) = keys_that_end_in_a;
-
-    var keys_that_end_in_z: u32 = 0;
     var steps_to___z: u128 = 0;
 
-    while (true) {
+    const KeySteps = struct {
+        key: str,
+        steps: u128,
+    };
+
+    var keys_to_keys = std.StringHashMap(KeySteps).init(allocator);
+    defer keys_to_keys.deinit();
+
+    var keys_not_done = std.ArrayList(str).init(allocator);
+    defer keys_not_done.deinit();
+
+    var i: usize = 0;
+    while (i < keys.items.len) : (i += 1) {
+        steps_to___z = 0;
+
+        var key = keys.items[i];
+
         for (instructions) |instruction| {
-            keys_that_end_in_z = 0;
-
             if (instruction == 'R') {
-                // iterate over current_keys
-                var i: usize = 0;
-                while (i < current_keys.items.len) : (i += 1) {
-                    const key = current_keys.items[i];
+                const node = nodes.get(key).?;
 
-                    const node = nodes.get(key).?;
-
-                    current_keys.items[i] = node.r;
-
-                    // check if current_keys last char is Z
-                    if (current_keys.items[i][2] == 'Z') {
-                        keys_that_end_in_z += 1;
-                    }
-                }
+                key = node.r;
             } else if (instruction == 'L') {
-                // iterate over current_keys
-                var i: usize = 0;
-                while (i < current_keys.items.len) : (i += 1) {
-                    const key = current_keys.items[i];
+                const node = nodes.get(key).?;
 
-                    const node = nodes.get(key).?;
-
-                    current_keys.items[i] = node.l;
-
-                    // check if keys last char is Z
-                    if (current_keys.items[i][2] == 'Z') {
-                        keys_that_end_in_z += 1;
-                    }
-                }
+                key = node.l;
             } else {
                 continue;
             }
 
             steps_to___z += 1;
 
-            if (steps_to___z % 1000000 == 0) {
-                print("Steps: {d}\n", .{steps_to___z});
-            }
-
-            if (keys_that_end_in_z == current_keys.items.len) {
-                return steps_to___z;
+            if (key[2] == 'Z') {
+                break;
             }
         }
+
+        if ((key[2] != 'Z') and (!std.mem.eql(u8, keys.items[i], key))) {
+            _ = try keys_not_done.append(try allocator.dupe(u8, keys.items[i]));
+        }
+
+        const key_steps = KeySteps{
+            .key = key,
+            .steps = steps_to___z,
+        };
+
+        _ = try keys_to_keys.put(try allocator.dupe(u8, keys.items[i]), key_steps);
+    }
+
+    var keys_not_done_buffer = std.ArrayList(str).init(allocator);
+
+    while (keys_not_done.items.len > 0) {
+        var k: usize = 0;
+
+        while (k < keys_not_done.items.len) : (k += 1) {
+            const key_not_done = keys_not_done.items[k];
+
+            const key_to_key = keys_to_keys.get(key_not_done).?;
+
+            const next_key = keys_to_keys.get(key_to_key.key).?;
+
+            const next_steps = key_to_key.steps + next_key.steps;
+
+            if (!std.mem.eql(u8, key_to_key.key, next_key.key)) {
+                const next_key_steps = KeySteps{
+                    .key = next_key.key,
+                    .steps = next_steps,
+                };
+
+                _ = try keys_to_keys.put(try allocator.dupe(u8, key_not_done), next_key_steps);
+
+                if (next_key.key[2] != 'Z') {
+                    _ = try keys_not_done_buffer.append(try allocator.dupe(u8, key_not_done));
+                }
+            }
+        }
+
+        keys_not_done = keys_not_done_buffer;
+        keys_not_done_buffer = std.ArrayList(str).init(allocator);
+    }
+
+    // least common multiple
+    steps_to___z = 1;
+
+    i = 0;
+    while (i < keys_that_end_in_a.items.len) : (i += 1) {
+        const key_that_ends_in_a = keys_that_end_in_a.items[i];
+        const steps = keys_to_keys.get(key_that_ends_in_a).?.steps;
+        steps_to___z = steps_to___z * steps / gcd(steps_to___z, steps);
     }
 
     return steps_to___z;
+}
+
+// https://rosettacode.org/wiki/Greatest_common_divisor
+pub fn gcd(u: anytype, v: anytype) @TypeOf(u) {
+    if (@typeInfo(@TypeOf(u)) != .Int) {
+        @compileError("non-integer type used on gcd: " ++ @typeName(@TypeOf(u)));
+    }
+    if (@typeInfo(@TypeOf(v)) != .Int) {
+        @compileError("non-integer type used on gcd: " ++ @typeName(@TypeOf(v)));
+    }
+    return if (v != 0) gcd(v, @mod(u, v)) else u;
 }
