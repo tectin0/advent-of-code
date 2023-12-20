@@ -103,6 +103,19 @@
       "dependsOn": [
         "Day 9 (Scala) Part Two Build"
       ]
+    },
+    {
+      "label": "Day 10 (OCaml) Part One Build",
+      "type": "shell",
+      "command": "cd day10_ocaml; wsl -e ocamlopt -o part_one part_one.ml"
+    },
+    {
+      "label": "Day 10 (OCaml) Part One Run",
+      "type": "shell",
+      "command": "cd day10_ocaml; wsl -e ./part_one",
+      "dependsOn": [
+        "Day 10 (OCaml) Part One Build"
+      ]
     }
   ]
 }

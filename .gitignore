@@ -17,3 +17,9 @@ zig-out
 # Scala
 *.class
 *.tasty
+
+# OCaml
+day10_ocaml/part_one
+*.cmi
+*.cmx
+*.o
