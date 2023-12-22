@@ -129,6 +129,16 @@
       "dependsOn": [
         "Day 10 (OCaml) Part Two Build"
       ]
+    },
+    {
+      "label": "Day 11 (Powershell) Part One",
+      "type": "shell",
+      "command": "cd day11_powershell; ./part_one.ps1"
+    },
+    {
+      "label": "Day 11 (Powershell) Part Two",
+      "type": "shell",
+      "command": "cd day11_powershell; ./part_two.ps1"
     }
   ]
 }
